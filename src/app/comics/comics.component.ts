@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ComicsService } from './../service/comics.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { FormsModule } from '@angular/forms';
+import { MarvelService } from '../service/Marvel.service'
 
 @Component({
   selector: 'app-comics',
@@ -13,20 +13,21 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './comics.component.html',
   styleUrls: ['./comics.component.css']
 })
+
 export class ComicsComponent implements OnInit {
   fasStar = fasStar;
   farStar = farStar;
   comicList: any = [];
-  superhero: string = '';
+  superhero: string = "";
 
-  constructor(private comicsService: ComicsService) {}
+  constructor(private marvelService: MarvelService) {}
 
   ngOnInit() {
     this.comicsGet();
   }
 
   comicsGet() {
-    this.comicsService.getCommics(this.superhero).subscribe(
+    this.marvelService.getCommics(this.superhero).subscribe(
       response => {
         this.comicList = response.data.results.map((comic: any) => ({
           ...comic,

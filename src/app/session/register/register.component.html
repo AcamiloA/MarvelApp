@@ -1,0 +1,48 @@
+<div class="card-container">
+    <mat-card>
+         <mat-card-header>
+              <mat-card-title>Registrarse</mat-card-title>
+         </mat-card-header>
+         <mat-card-content>
+              <form class="form-custom" [formGroup]="formRegistro">
+                   <mat-form-field class="input-custom">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre">
+                   </mat-form-field>
+                   <mat-form-field class="input-custom">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput formControlName="apellido">
+                    </mat-form-field>
+                    <mat-form-field class="input-custom">
+                        <mat-label>Nickname</mat-label>
+                        <input matInput formControlName="nickname">
+                    </mat-form-field>
+                   <mat-form-field class="input-custom">
+                        <mat-label>Correo</mat-label>
+                        <input matInput formControlName="email" type="email">
+                   </mat-form-field>
+                   <mat-form-field class="input-custom">
+                        <mat-label>Confirmación de Correo</mat-label>
+                        <input matInput formControlName="confirmEmail" type="email">
+                    </mat-form-field>
+                   <mat-form-field class="input-custom">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput formControlName="passwordHash" type="password">
+                   </mat-form-field>
+                   <mat-form-field class="input-custom">
+                        <mat-label>Confirmación de contraseña</mat-label>
+                        <input matInput formControlName="confirmPassword" type="password">
+                    </mat-form-field>
+                   <div class="flex">
+                        <button mat-flat-button 
+                        color="primary" 
+                        (click)="registrarse()">Registrarse</button>
+                        <button mat-flat-button color="warn" 
+                        (click)="volver()" 
+                        style="margin-left:8px">Volver</button>
+                   </div>
+              </form>
+         </mat-card-content>
+    </mat-card>
+
+</div>
