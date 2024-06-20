@@ -16,17 +16,15 @@ export class MarvelService {
   LIMIT = 100;
   path = "";
 
-  getCommics(superhero : string):Observable<any>
+  getComics(superhero : string):Observable<any>
   {
      
     if(superhero === "")
     {
-      console.log("super vacio")
       this.path = `${this.API_URI}?ts=${this.ts}&apikey=${this.APIKEY}&hash=${this.HASH}&limit=${this.LIMIT}`
     }
     else
     {
-      console.log(superhero)
       this.path = `${this.API_URI}?ts=${this.ts}&apikey=${this.APIKEY}&hash=${this.HASH}&limit=${this.LIMIT}&title=${superhero}`
     }
 

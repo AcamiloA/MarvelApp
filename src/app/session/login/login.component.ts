@@ -39,7 +39,6 @@ export class LoginComponent
 
     this.accessService.Login(objeto).subscribe({
         next:(data) =>{
-          console.log(data);
               if(data.isSucceeded){
                   localStorage.setItem("token",data.access_token);
                   this.router.navigate(['comics']);
@@ -49,7 +48,6 @@ export class LoginComponent
         },
         error:(error) =>{
               alert("Credenciales son incorrectas")
-              console.log(error.message);
         }
     })
   }

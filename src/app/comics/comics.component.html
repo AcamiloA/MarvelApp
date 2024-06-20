@@ -28,7 +28,7 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{comic.title}}</h5>
-                        <button (click)="toggleFavorite(comic)" class="favorite-button">
+                        <button (click)="toggleFavorite(favorite)" class="favorite-button">
                             <fa-icon [icon]="comic.isFavorite ? fasStar : farStar" class="favorite-icon"></fa-icon>
                         </button>
                     </div>

@@ -4,7 +4,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { FormsModule } from '@angular/forms';
-import { MarvelService } from '../service/Marvel.service'
+import { MarvelService } from '../service/marvel.service'
+import { ComicService } from '../service/comic.service'
+import { FavoriteComic } from '../Interfaces/FavoriteComic';
 
 @Component({
   selector: 'app-comics',
@@ -19,28 +21,35 @@ export class ComicsComponent implements OnInit {
   farStar = farStar;
   comicList: any = [];
   superhero: string = "";
+  favorite!: FavoriteComic;
 
-  constructor(private marvelService: MarvelService) {}
+  constructor(private marvelService: MarvelService, private comicService: ComicService) 
+  {}
 
   ngOnInit() {
     this.comicsGet();
   }
 
   comicsGet() {
-    this.marvelService.getCommics(this.superhero).subscribe(
+    this.marvelService.getComics(this.superhero).subscribe(
       response => {
         this.comicList = response.data.results.map((comic: any) => ({
           ...comic,
           isFavorite: false 
         }));
-        console.log(this.comicList);
       },
       error => console.error(error)
     );      
   }
 
   toggleFavorite(comic: any) {
+    
     comic.isFavorite = !comic.isFavorite;
+
+    if(comic.isFavorite)
+      this.comicService.AddFavorite(comic);
+    else
+      this.comicService.RemoveFavorite(comic);
   }
 
   trackByComicId(index: number, comic: any): number {

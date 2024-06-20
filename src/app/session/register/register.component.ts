@@ -56,7 +56,6 @@ export class RegisterComponent {
                 alert(error.error.errors);
            }
       })
-
  }
 
  volver(){
