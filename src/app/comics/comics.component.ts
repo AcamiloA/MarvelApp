@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +23,8 @@ export class ComicsComponent implements OnInit {
   comicList: any = [];
   superhero: string = "";
   favorite!: FavoriteComic;
-
+  private router = inject(Router);
+  
   constructor(private marvelService: MarvelService, private comicService: ComicService) 
   {}
 
@@ -43,16 +45,31 @@ export class ComicsComponent implements OnInit {
   }
 
   toggleFavorite(comic: any) {
-    
     comic.isFavorite = !comic.isFavorite;
+    
+    this.favorite = {
+      user: localStorage.getItem('user')!,
+      comicId: comic.id,
+      title: comic.title,
+      description: comic.description,
+      imgUrl: `${comic.thumbnail.path}.${comic.thumbnail.extension}`,
+      isFavorite: comic.isFavorite
+    };
+
 
     if(comic.isFavorite)
-      this.comicService.AddFavorite(comic);
+      this.comicService.AddFavorite(this.favorite).subscribe();
     else
-      this.comicService.RemoveFavorite(comic);
+      this.comicService.RemoveFavorite(this.favorite).subscribe();
+    
+
   }
 
   trackByComicId(index: number, comic: any): number {
     return comic.id;
+  }
+  
+  closeSession(){
+    this.router.navigate(['']);
   }
 }

@@ -27,6 +27,10 @@ export class LoginComponent
     clave: ['',Validators.required]
   })
 
+  ngOnInit(){
+    localStorage.setItem("token","");
+    localStorage.setItem("user","");
+  }
   iniciarSesion()
   {
     if(this.formLogin.invalid) return;
@@ -41,6 +45,7 @@ export class LoginComponent
         next:(data) =>{
               if(data.isSucceeded){
                   localStorage.setItem("token",data.access_token);
+                  localStorage.setItem("user",data.user);
                   this.router.navigate(['comics']);
               }else{
                   alert("Credenciales son incorrectas")
@@ -54,4 +59,6 @@ export class LoginComponent
   registrarse(){
     this.router.navigate(['registro']);
   }
+
+  
 }

@@ -13,20 +13,19 @@ export class ComicService {
   private BaseUrl : string = appsettings.apiUrl;
   constructor() { }
 
-  AddFavorite(model:FavoriteComic) : Observable<Response>
+  AddFavorite(model:FavoriteComic) : Observable<any>
   {
-    alert(model.imgUrl);
-    return this.http.post<Response>(`${this.BaseUrl}Comics/FavoriteComic`,model)
+    return this.http.post<any>(`${this.BaseUrl}Comics/FavoriteComic`, model);
   }
 
   RemoveFavorite(model:FavoriteComic) : Observable<any>
   {
-    return this.http.post<any>(`${this.BaseUrl}Comics/FavoriteComic?user=${model.user}&comicId=${model.comicId}`,model)
+    return this.http.delete<any>(`${this.BaseUrl}Comics/UnfavoriteComic/${model.user}/${model.comicId}`)
   }
 
   GetFavorites(model:FavoriteComic) : Observable<any>
   {
-    return this.http.get<any>(`${this.BaseUrl}Comics/FavoriteComic/${model.user}`)
+    return this.http.get<any>(`${this.BaseUrl}Comics/UnfavoriteComic/${model.user}`)
   }
 
 }

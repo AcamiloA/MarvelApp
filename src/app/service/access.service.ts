@@ -21,6 +21,8 @@ export class AccessService {
 
   Login(model:Login) : Observable<Token>
   {
-    return this.http.post<Token>(`${this.BaseUrl}User/Login`, model)
+    debugger;
+    var response = this.http.post<Token>(`${this.BaseUrl}User/Login`, model);
+    return response;
   }
 }
