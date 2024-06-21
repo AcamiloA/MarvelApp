@@ -23,9 +23,9 @@ export class ComicService {
     return this.http.delete<any>(`${this.BaseUrl}Comics/UnfavoriteComic/${model.user}/${model.comicId}`)
   }
 
-  GetFavorites(model:FavoriteComic) : Observable<any>
+  GetFavorites(user:string) : Observable<any>
   {
-    return this.http.get<any>(`${this.BaseUrl}Comics/UnfavoriteComic/${model.user}`)
+    return this.http.get<any>(`${this.BaseUrl}Comics/FavoriteComics/${user}`)
   }
 
 }

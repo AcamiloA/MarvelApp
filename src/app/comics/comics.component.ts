@@ -65,6 +65,10 @@ export class ComicsComponent implements OnInit {
 
   }
 
+  verFavoritos(){
+    this.router.navigate(['favoritos']);
+  }
+
   trackByComicId(index: number, comic: any): number {
     return comic.id;
   }
@@ -72,4 +76,6 @@ export class ComicsComponent implements OnInit {
   closeSession(){
     this.router.navigate(['']);
   }
+
+  
 }
